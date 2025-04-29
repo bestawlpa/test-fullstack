@@ -19,8 +19,7 @@ const Reset = () => {
     });
   };
 
-  const handleSendToken = async (e) => {
-    e.preventDefault();
+  const handleSendToken = async () => {
     try {
       const response = await fetch(
         "http://localhost:3000/api/send-verify-code",

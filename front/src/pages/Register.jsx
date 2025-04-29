@@ -18,9 +18,7 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     if (
       !formData.username ||
       !formData.password ||
