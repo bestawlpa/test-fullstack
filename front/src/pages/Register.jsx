@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    confirm_password: "",
+    confirmPassword: "",
     email: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,6 +21,21 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (
+      !formData.username ||
+      !formData.password ||
+      !formData.confirmPassword ||
+      !formData.email
+    ) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
     try {
       const response = await fetch("http://localhost:3000/api/register", {
         method: "POST",
@@ -28,19 +45,17 @@ const Register = () => {
         body: JSON.stringify({
           username: formData.username,
           password: formData.password,
-          confirmPassword: formData.confirm_password,
+          confirmPassword: formData.confirmPassword,
           email: formData.email,
         }),
       });
 
       if (response.ok) {
-        const data = await response.json();
-        console.log("Register success:", data);
         alert("Register Success!");
+        navigate("/login");
       } else {
         const errorData = await response.json();
-        console.error("Register failed:", errorData);
-        alert(`Register failed: ${errorData.message || "Unknown error"}`);
+        alert(`Register failed: ${errorData.message}`);
       }
     } catch (error) {
       console.error("Error during registration:", error);
@@ -73,8 +88,8 @@ const Register = () => {
           <input
             type="password"
             placeholder="Confirm Password"
-            name="confirm_password"
-            value={formData.confirm_password}
+            name="confirmPassword"
+            value={formData.confirmPassword}
             onChange={handleChange}
             className=" text-black text-sm font-bold border-2 border-[#B2B1B9] rounded-lg w-full h-[32px] px-1.5"
           />
