@@ -11,7 +11,7 @@ const createUser = async (userData) => {
     } catch (error) {
         throw error;
     }
-}
+};
 
 const getAllUsers = async () => {
     try {
@@ -19,7 +19,7 @@ const getAllUsers = async () => {
     } catch (error) {
         throw error;
     }
-}
+};
 
 const getUserById = async (id) => {
     try {
@@ -36,7 +36,7 @@ const getUserForLogin = async (username) => {
     } catch (error) {
         throw new Error('Error fetching userById: ' + err.message);
     }
-}
+};
 
 const sendVerifyCode = async (email) => {
     try {

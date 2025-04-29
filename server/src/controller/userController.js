@@ -1,4 +1,3 @@
-// userController
 const userService = require('../service/userService')
 const User = require('../model/userModel')
 const bcrypt = require('bcrypt');
