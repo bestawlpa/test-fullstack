@@ -62,7 +62,7 @@ const sendVerifyCode = async (email) => {
             from: process.env.EMAIL_USER,
             to: email,
             subject: 'Verify your account to reset password',
-            text: `Your verification code is: ${verifyCode}. It will expire in 1 hour.`
+            text: `Your verification code is: ${verifyCode}. It will expire in 30 minutes.`
         };
 
         await transporter.sendMail(mailOptions);
